@@ -7,17 +7,17 @@ pkgver=r151.cadf1e2
 pkgrel=1
 pkgdesc='A metapackage containing all dependencies for the Caelestia dotfiles'
 arch=('any')
-url='https://github.com/caelestia-dots/caelestia'
+url='https://github.com/thanglm2006/hyprland'
 license=('GPL-3.0-only')
 depends=('caelestia-cli' 'caelestia-shell'
          'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker'
          'wl-clipboard' 'cliphist' 'inotify-tools' 'app2unit' 'wireplumber' 'trash-cli'
          'foot' 'fish' 'eza' 'fastfetch' 'starship' 'btop' 'jq' 'adw-gtk-theme'
          'papirus-icon-theme' 'qt5ct-kde' 'qt6ct-kde' 'ttf-jetbrains-mono-nerd')
-optdepends=('thunar: file manager'
+optdepends=('nautilus: file manager'
             'spotify: music player'
             'vscode: code editor'
-            'zen-browser: web browser'
+            'brave: web browser'
             'todoist-appimage: todo manager'
             'uwsm: uwsm session'
             'gnome-keyring: keyring daemon'
