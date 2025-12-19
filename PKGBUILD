@@ -15,7 +15,6 @@ depends=('caelestia-cli' 'caelestia-shell'
          'foot' 'fish' 'eza' 'fastfetch' 'starship' 'btop' 'jq' 'adw-gtk-theme'
          'papirus-icon-theme' 'qt5ct-kde' 'qt6ct-kde' 'ttf-jetbrains-mono-nerd')
 optdepends=('nautilus: file manager'
-            'spotify: music player'
             'vscode: code editor'
             'brave: web browser'
             'todoist-appimage: todo manager'

@@ -3,7 +3,6 @@
 argparse -n 'install.fish' -X 0 \
     'h/help' \
     'noconfirm' \
-    'spotify' \
     'vscode=?!contains -- "$_flag_value" codium code' \
     'discord' \
     'brave' \
@@ -18,7 +17,6 @@ if set -q _flag_h
     echo 'options:'
     echo '  -h, --help                  show this help message and exit'
     echo '  --noconfirm                 do not confirm package installation'
-    echo '  --spotify                   install Spotify (Spicetify)'
     echo '  --vscode=[codium|code]      install VSCodium (or VSCode)'
     echo '  --discord                   install Discord (OpenAsar + Equicord)'
     echo '  --brave                       install brave-bin'
@@ -201,32 +199,6 @@ if confirm-overwrite $config/btop
     log 'Installing btop config...'
     ln -s (realpath btop) $config/btop
 end
-
-# Install spicetify
-if set -q _flag_spotify
-    log 'Installing spotify (spicetify)...'
-
-    set -l has_spicetify (pacman -Q spicetify-cli 2> /dev/null)
-    $aur_helper -S --needed spotify spicetify-cli spicetify-marketplace-bin $noconfirm
-
-    # Set permissions and init if new install
-    if test -z "$has_spicetify"
-        sudo chmod a+wr /opt/spotify
-        sudo chmod a+wr /opt/spotify/Apps -R
-        spicetify backup apply
-    end
-
-    # Install configs
-    if confirm-overwrite $config/spicetify
-        log 'Installing spicetify config...'
-        ln -s (realpath spicetify) $config/spicetify
-
-        # Set spicetify configs
-        spicetify config current_theme caelestia color_scheme caelestia custom_apps marketplace 2> /dev/null
-        spicetify apply
-    end
-end
-
 # Install vscode
 if set -q _flag_vscode
     test "$_flag_vscode" = 'code' && set -l prog 'code' || set -l prog 'codium'
@@ -267,7 +239,10 @@ if set -q _flag_brave
     log 'Installing brave...'
     $aur_helper -S --needed brave-bin $noconfirm
 end
-
+if confirm-overwrite $config/BraveSoftware
+    log 'Installing brave config...'
+    ln -s (realpath brave) $config/BraveSoftware
+end
 # Generate scheme stuff if needed
 if ! test -f $state/caelestia/scheme.json
     caelestia scheme set -n shadotheme
