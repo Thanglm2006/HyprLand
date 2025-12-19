@@ -6,7 +6,7 @@ argparse -n 'install.fish' -X 0 \
     'spotify' \
     'vscode=?!contains -- "$_flag_value" codium code' \
     'discord' \
-    'zen' \
+    'brave' \
     'aur-helper=!contains -- "$_flag_value" yay paru' \
     -- $argv
 or exit
@@ -21,7 +21,7 @@ if set -q _flag_h
     echo '  --spotify                   install Spotify (Spicetify)'
     echo '  --vscode=[codium|code]      install VSCodium (or VSCode)'
     echo '  --discord                   install Discord (OpenAsar + Equicord)'
-    echo '  --zen                       install Zen browser'
+    echo '  --brave                       install brave-bin'
     echo '  --aur-helper=[yay|paru]     the AUR helper to use'
 
     exit
@@ -262,37 +262,10 @@ if set -q _flag_discord
     $aur_helper -Rns equicord-installer-bin $noconfirm
 end
 
-# Install zen
-if set -q _flag_zen
-    log 'Installing zen...'
-    $aur_helper -S --needed zen-browser-bin $noconfirm
-
-    # Install userChrome css
-    set -l chrome $HOME/.zen/*/chrome
-    if confirm-overwrite $chrome/userChrome.css
-        log 'Installing zen userChrome...'
-        ln -s (realpath zen/userChrome.css) $chrome/userChrome.css
-    end
-
-    # Install native app
-    set -l hosts $HOME/.mozilla/native-messaging-hosts
-    set -l lib $HOME/.local/lib/caelestia
-
-    if confirm-overwrite $hosts/caelestiafox.json
-        log 'Installing zen native app manifest...'
-        mkdir -p $hosts
-        cp zen/native_app/manifest.json $hosts/caelestiafox.json
-        sed -i "s|{{ \$lib }}|$lib|g" $hosts/caelestiafox.json
-    end
-
-    if confirm-overwrite $lib/caelestiafox
-        log 'Installing zen native app...'
-        mkdir -p $lib
-        ln -s (realpath zen/native_app/app.fish) $lib/caelestiafox
-    end
-
-    # Prompt user to install extension
-    log 'Please install the CaelestiaFox extension from https://addons.mozilla.org/en-US/firefox/addon/caelestiafox if you have not already done so.'
+# Install brave
+if set -q _flag_brave
+    log 'Installing brave...'
+    $aur_helper -S --needed brave-bin $noconfirm
 end
 
 # Generate scheme stuff if needed

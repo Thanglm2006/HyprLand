@@ -7,7 +7,7 @@ pkgver=r151.cadf1e2
 pkgrel=1
 pkgdesc='A metapackage containing all dependencies for the Caelestia dotfiles'
 arch=('any')
-url='https://github.com/Thanglm2006/hyprland'
+url='https://github.com/Thanglm2006/Hyprland'
 license=('GPL-3.0-only')
 depends=('caelestia-cli' 'caelestia-shell'
          'hyprland' 'xdg-desktop-portal-hyprland' 'xdg-desktop-portal-gtk' 'hyprpicker'
