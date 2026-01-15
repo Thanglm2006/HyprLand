@@ -40,3 +40,12 @@ if status is-interactive
         echo -en "\e]133;A\e\\"
     end
 end
+# Android & Java Environment
+set -gx ANDROID_HOME /opt/android-sdk
+set -gx JAVA_HOME /usr/lib/jvm/java-21-openjdk
+
+
+fish_add_path $ANDROID_HOME/platform-tools
+fish_add_path /opt/android-studio/bin 
+
+starship init fish | source
